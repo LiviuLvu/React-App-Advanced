@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Person from './Person/Person';
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   state = {
@@ -37,39 +38,22 @@ class App extends Component {
   };
 
   render() {
-    const btnCtrlDisplay = {
-      padding: '20px',
-      border: 'none',
-      backgroundColor: 'green',
-      color: '#FFF',
-      fontSize: '18px'
-    };
-
     let persons = null;
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map( (person) => {
-            return (<Person
-              click={() => this.deletePersonHandler(person.id)}
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-              key={person.id}
-              name={person.name}
-              age={person.age} />
-            )
-          })}
-        </div>
-      );
-      btnCtrlDisplay.backgroundColor = 'red';
+      persons = <Persons
+        persons={this.state.persons}
+        click={(person) => this.deletePersonHandler(person.id)}
+        changed={(event, person) => this.nameChangedHandler(event, person.id)}
+      />;
     }
 
     return (
       <div className="App">
-        <h1>React app</h1>
-        <button
-          style={btnCtrlDisplay}
-          onClick={this.togglePersonsHandler}>Display Switch</button>
-          {persons}
+        <Cockpit
+          state={this.state.showPersons}
+          click={this.togglePersonsHandler}
+        />
+        {persons}
       </div>
     );
   }
