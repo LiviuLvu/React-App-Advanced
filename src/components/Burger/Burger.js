@@ -13,10 +13,17 @@ const Burger = (props) => {
       });
   });
 
+  const  checkIfIngredients = ingredientLayers.reduce((total, value)=> {
+    return total + value.length;
+  }, 0);
+
+  const placeholderMessage = (checkIfIngredients === 0) ? <p>Please start adding ingredients</p> : null;
+
   return (
     <div className={style.Burger}>
       <BurgerIngredient type={"bread-top"}/>
       { ingredientLayers }
+      { placeholderMessage }
       <BurgerIngredient type={"bread-bottom"}/>
     </div>
   );
