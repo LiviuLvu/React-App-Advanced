@@ -15,6 +15,7 @@ const BuildControls = (props) => {
       <div className={style.BuildControls}>
         {controls.map(control =>
           <BuildControl
+            disabled={props.btnState[control.type]}
             addIng={() => props.addIngredient(control.type)}
             subtractIng={() => props.subtractIngredient(control.type)}
             key={control.type}

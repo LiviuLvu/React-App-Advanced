@@ -35,9 +35,7 @@ addIngredientHandler = (type) => {
 };
 
   subtractIngredientHandler = (type) => {
-    const addCountForIngredient = {
-      ...this.state.ingredients
-    };
+    const addCountForIngredient = { ...this.state.ingredients };
 
     if (addCountForIngredient[type] <= 0) {
       return;
@@ -52,11 +50,16 @@ addIngredientHandler = (type) => {
   };
 
   render () {
+    const buttonDisable = { ...this.state.ingredients };
+    for (let key in buttonDisable) {
+      buttonDisable[key] = buttonDisable[key] <= 0;
+    }
 
     return (
       <Aux>
         <Burger ingredients={ this.state.ingredients } />
         <BuildControls
+          btnState={ buttonDisable }
           addIngredient={this.addIngredientHandler}
           subtractIngredient={this.subtractIngredientHandler } />
       </Aux>
