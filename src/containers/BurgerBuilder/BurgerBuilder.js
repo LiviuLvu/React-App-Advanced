@@ -34,12 +34,31 @@ addIngredientHandler = (type) => {
   });
 };
 
+  subtractIngredientHandler = (type) => {
+    const addCountForIngredient = {
+      ...this.state.ingredients
+    };
+
+    if (addCountForIngredient[type] <= 0) {
+      return;
+    }
+
+    addCountForIngredient[type] = this.state.ingredients[type] - 1;
+
+    this.setState({
+      ingredients: addCountForIngredient,
+      totalPrice: this.state.totalPrice - INGREDIENT_PRICES[type]
+    });
+  };
 
   render () {
+
     return (
       <Aux>
         <Burger ingredients={ this.state.ingredients } />
-        <BuildControls addIngredient={this.addIngredientHandler} />
+        <BuildControls
+          addIngredient={this.addIngredientHandler}
+          subtractIngredient={this.subtractIngredientHandler } />
       </Aux>
     );
   }
