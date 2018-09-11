@@ -59,6 +59,7 @@ addIngredientHandler = (type) => {
       <Aux>
         <Burger ingredients={ this.state.ingredients } />
         <BuildControls
+          price={this.state.totalPrice}
           btnState={ buttonDisable }
           addIngredient={this.addIngredientHandler}
           subtractIngredient={this.subtractIngredientHandler } />
