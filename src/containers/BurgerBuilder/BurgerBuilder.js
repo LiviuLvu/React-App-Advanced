@@ -19,19 +19,23 @@ class BurgerBuilder extends Component {
       cheese: 0,
       meat: 0,
     },
-    totalPrice: 4
+    totalPrice: 4,
+    isPurchasable: false
   };
 
   addIngredientHandler = (type) => {
     const addCountForIngredient = {
       ...this.state.ingredients
     };
+
     addCountForIngredient[type] = this.state.ingredients[type] + 1;
 
     this.setState({
       ingredients: addCountForIngredient,
       totalPrice: this.state.totalPrice + INGREDIENT_PRICES[type]
     });
+
+    this.togglePurchaseAbility(addCountForIngredient);
   };
 
   subtractIngredientHandler = (type) => {
@@ -40,12 +44,24 @@ class BurgerBuilder extends Component {
     if (addCountForIngredient[type] <= 0) {
       return;
     }
-
     addCountForIngredient[type] = this.state.ingredients[type] - 1;
 
     this.setState({
       ingredients: addCountForIngredient,
       totalPrice: this.state.totalPrice - INGREDIENT_PRICES[type]
+    });
+
+    this.togglePurchaseAbility(addCountForIngredient);
+  };
+
+  togglePurchaseAbility = (newerState) => {
+    const isPurchasable = Object
+      .keys(newerState)
+      .map(ingredient => newerState[ingredient])
+      .reduce((sum, addValue) => sum + addValue, 0);
+
+    this.setState({
+      isPurchasable: isPurchasable > 0
     });
   };
 
@@ -59,6 +75,7 @@ class BurgerBuilder extends Component {
       <Aux>
         <Burger ingredients={ this.state.ingredients } />
         <BuildControls
+          isPurchasable={this.state.isPurchasable}
           price={this.state.totalPrice}
           btnState={ buttonDisable }
           addIngredient={this.addIngredientHandler}
