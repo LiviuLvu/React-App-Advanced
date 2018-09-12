@@ -22,17 +22,17 @@ class BurgerBuilder extends Component {
     totalPrice: 4
   };
 
-addIngredientHandler = (type) => {
-  const addCountForIngredient = {
-    ...this.state.ingredients
-  };
-  addCountForIngredient[type] = this.state.ingredients[type] + 1;
+  addIngredientHandler = (type) => {
+    const addCountForIngredient = {
+      ...this.state.ingredients
+    };
+    addCountForIngredient[type] = this.state.ingredients[type] + 1;
 
-  this.setState({
-    ingredients: addCountForIngredient,
-    totalPrice: this.state.totalPrice + INGREDIENT_PRICES[type]
-  });
-};
+    this.setState({
+      ingredients: addCountForIngredient,
+      totalPrice: this.state.totalPrice + INGREDIENT_PRICES[type]
+    });
+  };
 
   subtractIngredientHandler = (type) => {
     const addCountForIngredient = { ...this.state.ingredients };
