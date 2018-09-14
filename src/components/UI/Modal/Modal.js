@@ -1,8 +1,14 @@
 import React from 'react';
 
 import style from './Modal.css';
+import Aux from '../../../hoc/Auxiliary';
+import Backdrop from '../Backdrop/Backdrop';
 
 const Modal = (props) =>
+  <Aux>
+    <Backdrop
+      show={props.show}
+      clicked={props.modalClose}/>
     <div
       className={style.Modal}
       style={{
@@ -11,5 +17,6 @@ const Modal = (props) =>
       }}
     >
       {props.children}
-    </div>;
+    </div>
+  </Aux>;
 export default Modal;
