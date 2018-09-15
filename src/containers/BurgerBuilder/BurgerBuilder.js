@@ -68,10 +68,14 @@ class BurgerBuilder extends Component {
     });
   };
 
-  purchaseHandler = () => {
+  purchaseToggleHandler = () => {
     this.setState({
       purchasing: !this.state.purchasing
     })
+  };
+
+  purchaseContinueHandler = () => {
+    alert("Proceeding to checkout...");
   };
 
   render () {
@@ -84,7 +88,7 @@ class BurgerBuilder extends Component {
       <Aux>
         <Burger ingredients={ this.state.ingredients } />
         <BuildControls
-          ordered={this.purchaseHandler}
+          ordered={this.purchaseToggleHandler}
           isPurchasable={this.state.isPurchasable}
           price={this.state.totalPrice}
           btnState={ buttonDisable }
@@ -92,9 +96,12 @@ class BurgerBuilder extends Component {
           subtractIngredient={this.subtractIngredientHandler } />
         <Modal
           show={this.state.purchasing}
-          modalClose={this.purchaseHandler}
+          modalClose={this.purchaseToggleHandler}
         >
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+              purchaseCancel={this.purchaseToggleHandler}
+              purchaseContinue={this.purchaseContinueHandler}
+              ingredients={this.state.ingredients} />
         </Modal>
       </Aux>
     );
