@@ -8,7 +8,7 @@ const Burger = (props) => {
   // Generate ingredients dynamically
   // The generated array of ingredients is based on the database object / current state
   const ingredientLayers = Object.keys(props.ingredients).map(igKey => { // ex. cheese, bacon
-    return [...Array( props.ingredients[igKey] )].map((_, i) => { // number of layers for that ingredient
+    return [...Array( props.ingredients[igKey] )].map((_, i) => { // quantity for that ingredient
       return <BurgerIngredient key={igKey + i} type={igKey} />
       });
   });
