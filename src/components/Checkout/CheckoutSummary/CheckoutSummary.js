@@ -6,9 +6,11 @@ import style from './CheckoutSummary.css'
 const CheckoutSummary = (props) =>
   <div className={style.CheckoutSummary}>
     <h1>Enjoy!</h1>
+
     <div style={{width: '100%'}}>
       <Burger ingredients={props.ingredients} />
     </div>
+
     <Button
       btnType="Danger"
       clicked
