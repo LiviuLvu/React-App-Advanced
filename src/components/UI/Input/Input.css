@@ -28,3 +28,7 @@
 .InputElement:focus::placeholder {
   color: #e3e3e3;
 }
+
+.Invalid {
+  border: 1px solid red;
+}
