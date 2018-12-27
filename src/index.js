@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
