@@ -4,5 +4,5 @@ export {
   initIngredients
 } from './burgerBuilderAction';
 export {
-  purchaseBurgerStart
+  purchaseBurger
 } from './order';
