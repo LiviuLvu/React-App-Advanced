@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/checkoutSummary";
 import ContactData from "./ContactData/ContactData";
-import * as actions from '../../store/actions/index';
 
 class Checkout extends Component {
   checkoutCanceledHandler = () => {
