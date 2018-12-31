@@ -23,9 +23,24 @@ export const authFail = (error) => {
   }
 };
 
+export const logout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  }
+};
+
+export const checkAuthTimeout = (expirationTime) => {
+  return dispatch => {
+    setTimeout(()=>{
+      dispatch(logout());
+    }, expirationTime * 1000);
+  }
+};
+
 export const auth = (email, password, isSignup) => {
   return dispatch => {
     dispatch(authStart());
+    dispatch(checkAuthTimeout(response.data.expiresIn));
 
     let firebaseEndpointURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCgvP6e1WH7aa2jTcF-FJlBiSaVjv8alsE';
     if(!isSignup) {
