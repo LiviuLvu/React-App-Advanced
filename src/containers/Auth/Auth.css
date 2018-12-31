@@ -12,6 +12,10 @@
   line-height: 20px;
 }
 
+.Error {
+  color: red;
+}
+
 @media (min-width: 600px) {
   .Auth {
     width: 500px;
