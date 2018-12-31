@@ -22,23 +22,29 @@ export const authFail = (error) => {
   }
 };
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignup) => {
   return dispatch => {
     dispatch(authStart());
-    const firebaseEndpointURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCgvP6e1WH7aa2jTcF-FJlBiSaVjv8alsE';
+
+    let firebaseEndpointURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCgvP6e1WH7aa2jTcF-FJlBiSaVjv8alsE';
+    if(!isSignup) {
+      firebaseEndpointURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCgvP6e1WH7aa2jTcF-FJlBiSaVjv8alsE';
+    }
+
     const authData = {
       email: email,
       password: password,
       returnSecureToken: true
     };
+
     axios.post(firebaseEndpointURL, authData)
       .then(response => {
         console.log(response);
         dispatch(authSuccess(response.data));
       })
-      .catch(err => {
-        console.log(err);
-        dispatch(authFail());
+      .catch(error => {
+        console.log(error);
+        dispatch(authFail(error));
       });
   }
 };
