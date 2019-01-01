@@ -40,7 +40,6 @@ export const checkAuthTimeout = (expirationTime) => {
 export const auth = (email, password, isSignup) => {
   return dispatch => {
     dispatch(authStart());
-    dispatch(checkAuthTimeout(response.data.expiresIn));
 
     let firebaseEndpointURL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCgvP6e1WH7aa2jTcF-FJlBiSaVjv8alsE';
     if(!isSignup) {
@@ -57,6 +56,7 @@ export const auth = (email, password, isSignup) => {
       .then(response => {
         console.log(response);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
+        dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch(error => {
         dispatch(authFail(error.response.data.error));
