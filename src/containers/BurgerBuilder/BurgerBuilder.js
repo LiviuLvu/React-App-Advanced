@@ -59,7 +59,7 @@ class BurgerBuilder extends Component {
             subtractIngredient={this.props.onIngredientRemoved}
             btnState={ buttonDisable }
             isPurchasable={this.updatePurchaseState(this.props.ings)}
-            ordered={this.purchaseToggleHandler}
+            ordered={this.purchaseHandler}
             isAuth={this.props.isAuth}
             price={this.props.price}
           />
@@ -68,7 +68,7 @@ class BurgerBuilder extends Component {
       orderSummary = <OrderSummary
         ingredients={this.props.ings}
         price={this.props.price}
-        purchaseCancel={this.purchaseToggleHandler}
+        purchaseCancel={this.purchaseHandler}
         purchaseContinue={this.purchaseContinueHandler}
       />;
     }
@@ -77,7 +77,7 @@ class BurgerBuilder extends Component {
       <Aux>
         <Modal
           show={this.state.purchasing}
-          modalClose={this.purchaseToggleHandler}
+          modalClose={this.purchaseHandler}
         >
           {orderSummary}
         </Modal>
