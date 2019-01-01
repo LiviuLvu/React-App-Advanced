@@ -32,11 +32,11 @@ export const logout = () => {
   }
 };
 
-export const checkAuthTimeout = (expirationDate) => {
+export const checkAuthTimeout = (expirationTime) => {
   return dispatch => {
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatch(logout());
-    }, expirationDate * 1000);
+    }, expirationTime * 1000);
   }
 };
 
@@ -84,14 +84,14 @@ export const authCheckState = () => {
     if (!token) {
       dispatch(logout());
     } else {
-      const expirationDate = new Date(localStorage.getItem('expirationDate '));
-      if (expirationDate > new Date()) {
+      const expirationDate = new Date(localStorage.getItem('expirationDate'));
+      if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
         const userId = localStorage.getItem('userId');
         dispatch(authSuccess(token, userId));
         dispatch(checkAuthTimeout(
-          expirationDate.getSeconds() - new Date().getSeconds()
+          (expirationDate.getTime() - new Date().getTime()) / 1000
         ));
       }
     }
